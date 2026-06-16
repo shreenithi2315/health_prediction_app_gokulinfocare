@@ -51,12 +51,12 @@ for patient in patients:
     if selected.startswith(str(patient[0])):
         selected_data = patient
         break
-updated_name = st.text_input("Full Name", value=selected_data[1])
-updated_dob = st.date_input("Date of Birth", value=date.fromisoformat(selected_data[2]))
-updated_email = st.text_input("Email", value=selected_data[3])
-updated_glucose = st.number_input("Glucose (mg/dL)", min_value=0.0, value=selected_data[4])
-updated_haemoglobin = st.number_input("Haemoglobin (g/dL)", min_value=0.0, value=selected_data[5])
-updated_cholesterol = st.number_input("Cholesterol (mg/dL)", min_value=0.0, value=selected_data[6])
+updated_name = st.text_input("Full Name", value=selected_data[1],key="updated_name")
+updated_dob = st.date_input("Date of Birth", value=date.fromisoformat(selected_data[2]),key="updated_dob")
+updated_email = st.text_input("Email", value=selected_data[3],key="updated_email")
+updated_glucose = st.number_input("Glucose (mg/dL)", min_value=0.0, value=selected_data[4],key="updated_glucose")
+updated_haemoglobin = st.number_input("Haemoglobin (g/dL)", min_value=0.0, value=selected_data[5],key="updated_haemoglobin")
+updated_cholesterol = st.number_input("Cholesterol (mg/dL)", min_value=0.0, value=selected_data[6],key="updated_cholesterol")
 
 if st.button("Update Patient"):
     if updated_name == "":
