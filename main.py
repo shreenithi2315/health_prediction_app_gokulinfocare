@@ -8,7 +8,7 @@ st.title("Health Prediction App")
 st.subheader("Enter Patient Details")
 
 full_name = st.text_input("Full Name")
-dob = st.date_input("Date of Birth")
+dob = st.date_input("Date of Birth", min_value=date(1950, 1, 1), max_value=date.today())
 email = st.text_input("Email")
 glucose = st.number_input("Glucose (mg/dL)", min_value=0.0)
 haemoglobin = st.number_input("Haemoglobin (g/dL)", min_value=0.0)
@@ -49,6 +49,7 @@ patient_options = []
 for patient in patients:
     patient_options.append(str(patient[0]) + " - " + patient[1])
 selected = st.selectbox("Select patient ", patient_options)
+selected_data = None
 for patient in patients:
     if selected.startswith(str(patient[0])):
         selected_data = patient

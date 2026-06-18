@@ -12,7 +12,7 @@ def get_prediction(name, glucose, haemoglobin, cholesterol):
     Haemoglobin: {haemoglobin} g/dL
     Cholesterol: {cholesterol} mg/dL
     Write a short health remark in 2 to 3 plain sentences only.
-    No headings, no bullet points. Just a simple health observation.
+    Just a simple health observation.
     """
     result = my_client.chat.completions.create(
         model="llama-3.3-70b-versatile",
