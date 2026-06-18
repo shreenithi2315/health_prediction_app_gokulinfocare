@@ -2,7 +2,7 @@ from datetime import date
 
 import streamlit as st
 
-from db import add_patient, get_all_patients, update_patient, delete_patient
+from db import add_patient, get_all_patients, update_patient, delete_patient, email_exists
 from predictor import get_prediction
 st.title("Health Prediction App")
 st.subheader("Enter Patient Details")
@@ -17,12 +17,14 @@ cholesterol = st.number_input("Cholesterol (mg/dL)", min_value=0.0)
 if st.button("Add Patient"):
     if full_name == "":
         st.error("Please enter the patient's full name")
-    elif "@" not in email or email == "":
+    elif "@" not in email or email == "" or "." not in email.split("@")[-1]:
         st.error("Please enter a valid email address")
     elif dob > date.today():
         st.error("Date of birth cannot be a future date")
     elif glucose == 0.0 or haemoglobin == 0.0 or cholesterol == 0.0:
         st.error("Please enter valid blood test values")
+    elif email_exists(email):
+        st.error("This email already exists in the system")
     else:
         remarks = get_prediction(full_name, glucose, haemoglobin, cholesterol)
         add_patient(full_name,str(dob), email, glucose, haemoglobin, cholesterol, remarks)

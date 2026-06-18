@@ -21,6 +21,16 @@ def create_table():
 
 
 create_table()
+def email_exists(email):
+    conn = connect()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM patients WHERE email = ?", (email,))
+    result = cursor.fetchone()
+    conn.close()
+    if result:
+        return True
+    else:
+        return False
 
 def add_patient(full_name,dob, email, glucose, haemoglobin, cholesterol, remarks):
     conn = connect()
@@ -31,6 +41,7 @@ def add_patient(full_name,dob, email, glucose, haemoglobin, cholesterol, remarks
     """, (full_name, dob, email, glucose, haemoglobin, cholesterol, remarks))
     conn.commit()
     conn.close()
+
 
 def get_all_patients():
     conn = connect()
